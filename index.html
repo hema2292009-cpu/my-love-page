@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>رسائل ليكي ❤️</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Cairo', sans-serif;
+  background: linear-gradient(135deg, #1c1118, #39202b, #20151c);
+  color: #fff4ed;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.screen {
+  display: none;
+  min-height: 100vh;
+  padding: 25px 18px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.screen.active {
+  display: flex;
+}
+
+h1 {
+  font-size: 27px;
+  color: #ffd6df;
+}
+
+p {
+  line-height: 2;
+}
+
+.sub {
+  color: #d5b8c3;
+  font-size: 14px;
+}
+
+/* شاشة العين */
+
+.eye-box {
+  width: 230px;
+  height: 230px;
+  border-radius: 50%;
+  border: 1px solid #d895b2;
+  padding: 9px;
+  position: relative;
+  margin: 25px auto;
+  box-shadow: 0 0 35px #c64e8050;
+  overflow: hidden;
+}
+
+.eye-box img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  display: none;
+}
+
+.eye-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 70px;
+}
+
+.scan-line {
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  left: 0;
+  top: 0;
+  background: #ff91c5;
+  box-shadow: 0 0 15px #ff91c5;
+  animation: scan 2s linear infinite;
+  display: none;
+}
+
+@keyframes scan {
+  0% { top: 5%; }
+  100% { top: 95%; }
+}
+
+.main-btn {
+  background: #c66a91;
+  color: white;
+  border: none;
+  padding: 13px 28px;
+  border-radius: 30px;
+  font-size: 16px;
+  margin: 10px;
+  box-shadow: 0 5px 20px #0003;
+  transition: .3s;
+}
+
+.main-btn:hover {
+  transform: scale(1.04);
+  background: #dd83a8;
+}
+
+input[type=file] {
+  display: none;
+}
+
+#status {
+  min-height: 30px;
+  color: #ffd3e4;
+}
+
+/* شاشة الظروف */
+
+.envelopes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(130px, 1fr));
+  gap: 17px;
+  width: 100%;
+  max-width: 430px;
+  margin-top: 25px;
+}
+
+.envelope {
+  border: 1px solid #ffffff20;
+  border-radius: 18px;
+  padding: 20px 10px;
+  background: #ffffff0b;
+  transition: .3s;
+  cursor: pointer;
+  backdrop-filter: blur(5px);
+}
+
+.envelope:hover {
+  transform: translateY(-5px);
+  background: #ffffff15;
+}
+
+.env-icon {
+  font-size: 48px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.envelope h3 {
+  font-size: 14px;
+  color: #ffe0e9;
+  margin: 5px 0;
+}
+
+.envelope p {
+  color: #bfa8b2;
+  font-size: 11px;
+  margin: 0;
+}
+
+#letter {
+  position: fixed;
+  inset: 0;
+  background: #100c10f5;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  z-index: 10;
+}
+
+.paper {
+  background: #fff3e7;
+  color: #62444d;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 430px;
+  padding: 27px 23px;
+  max-height: 85vh;
+  overflow-y: auto;
+  animation: paper .5s ease;
+  box-shadow: 0 0 40px #e59bb430;
+}
+
+@keyframes paper {
+  from {
+    opacity: 0;
+    transform: translateY(60px) scale(.8);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.paper h2 {
+  color: #b75f83;
+  font-size: 22px;
+}
+
+.paper p {
+  font-size: 15px;
+  line-height: 2.2;
+  white-space: pre-line;
+}
+
+.close-btn {
+  background: #bd6e8d;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 25px;
+  margin-top: 15px;
+}
+
+.heart {
+  position: fixed;
+  bottom: -30px;
+  animation: float 7s linear forwards;
+  pointer-events: none;
+  opacity: .6;
+  z-index: 0;
+}
+
+@keyframes float {
+  to {
+    transform: translateY(-110vh) rotate(40deg);
+    opacity: 0;
+  }
+}
+
+footer {
+  color: #a78b98;
+  font-size: 12px;
+  margin-top: 35px;
+}
+
+@media(max-width:360px) {
+  .envelopes {
+    gap: 10px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- شاشة العين -->
+<section class="screen active" id="screen1">
+
+  <div style="font-size:35px">♡</div>
+
+  <h1>قبل ما تدخلي...</h1>
+
+  <p class="sub">
+    في حاجات صغيرة معمولة مخصوص عشانك،
+    بس الأول خلينا نتأكد إنك إنتِ ❤️
+  </p>
+
+  <div class="eye-box">
+    <div class="eye-placeholder" id="placeholder">👁️</div>
+    <img id="eyeImage">
+    <div class="scan-line" id="scanLine"></div>
+  </div>
+
+  <label for="eyeFile" class="main-btn">
+    اختاري صورة عين 👁️
+  </label>
+
+  <input type="file" id="eyeFile" accept="image/*">
+
+  <button class="main-btn" id="scanBtn" style="display:none">
+    ابدأ المسح ✨
+  </button>
+
+  <p id="status"></p>
+
+</section>
+
+<!-- شاشة الظروف -->
+<section class="screen" id="screen2">
+
+  <div style="font-size:30px">♡</div>
+
+  <h1>6 رسائل ليكي</h1>
+
+  <p class="sub">
+    كل ظرف فيهم فيه كلام، افتحي اللي قلبك يختاره 🤍
+  </p>
+
+  <div class="envelopes">
+
+    <div class="envelope" onclick="openLetter(0)">
+      <span class="env-icon">💌</span>
+      <h3>لما تكوني زعلانة</h3>
+      <p>رسالة ليوم مش حلو</p>
+    </div>
+
+    <div class="envelope" onclick="openLetter(1)">
+      <span class="env-icon">🫂</span>
+      <h3>لما تحسي إنك لوحدك</h3>
+      <p>أنا عايز أفكرك بحاجة</p>
+    </div>
+
+    <div class="envelope" onclick="openLetter(2)">
+      <span class="env-icon">🌙</span>
+      <h3>لما تشتاقي</h3>
+      <p>كلام من القلب</p>
+    </div>
+
+    <div class="envelope" onclick="openLetter(3)">
+      <span class="env-icon">🌷</span>
+      <h3>لما تكوني مبسوطة</h3>
+      <p>خلي الفرحة تكمل</p>
+    </div>
+
+    <div class="envelope" onclick="openLetter(4)">
+      <span class="env-icon">🦋</span>
+      <h3>لما تنسي قيمتك</h3>
+      <p>محتاجه تقري الكلام ده</p>
+    </div>
+
+    <div class="envelope" onclick="openLetter(5)">
+      <span class="env-icon">❤️</span>
+      <h3>الظرف الأخير</h3>
+      <p>افتحيه في أي وقت</p>
+    </div>
+
+  </div>
+
+  <footer>بعض الكلام مكانه القلب مش الشات ♡</footer>
+
+</section>
+
+<!-- الرسالة -->
+<div id="letter">
+  <div class="paper">
+    <div style="font-size:35px">💌</div>
+    <h2 id="letterTitle"></h2>
+    <p id="letterText"></p>
+    <button class="close-btn" onclick="closeLetter()">ارجعي للظروف 🤍</button>
+  </div>
+</div>
+
+<script>
+
+const letters = [
+
+{
+title: "لما تكوني زعلانة 🤍",
+text: `عارف إن مش كل يوم بيكون حلو،
+وإن ساعات الواحد بيبقى جواه كلام كتير مش عارف يقوله،
+بس عايزك تفتكري إن يومك الوحش مش معناه إن حياتك وحشة،
+وإن مهما كان اللي مضايقك، إنتِ تستاهلي أيام أحنّ من كده بكتير.
+
+ومتنسيش إنك شخص غالي،
+ومشاعرك تستاهل تتسمع،
+وإن مش لازم تبقي كويسة طول الوقت،
+خدي وقتك، واهدي،
+وبكرة يمكن يكون ألطف من النهارده ❤️`
+},
+
+{
+title: "لما تحسي إنك لوحدك 🫂",
+text: `لو حسيتي إن الدنيا بعيدة عنك،
+وإن مفيش حد فاهمك،
+افتكري إنك مش لازم تبقي قوية طول الوقت،
+ولا لازم تشرحي كل اللي جواكي عشان حد يفهم إنك تعبانة.
+
+خدي وقتك،
+واهدي،
+وافتكري إن وجودك في الدنيا له قيمة كبيرة،
+وإنك تستاهلي الحب والاهتمام والراحة،
+وإن فيه دايمًا أيام حلوة لسه مستنياكي.`
+},
+
+{
+title: "لما تشتاقي 🌙",
+text: `يمكن المسافات ساعات بتخلّي الكلام ملوش كفاية،
+ويمكن مهما اتكلمنا يفضل في كلام كتير لسه متقالش،
+بس في حاجات حلوة بتفضل موجودة حتى لو مش شايفين بعض.
+
+أتمنى كل مرة تشتاقي فيها،
+تفتكري لحظة حلوة ضحكنا فيها،
+وتبتسمي بدل ما الاشتياق يزعلك،
+وتعرفي إن الذكريات الحلوة مش بتضيع. ❤️`
+},
+
+{
+title: "لما تكوني مبسوطة 🌷",
+text: `لو بتفتحي الظرف ده وإنتِ مبسوطة،
+فأتمنى سعادتك تفضل مكملة،
+وإن يومك يبقى مليان حاجات حلوة أكتر.
+
+خليكي دايمًا بتضحكي،
+ومتصغريش فرحتك أبدًا،
+افرحي بكل حاجة حلوة حتى لو كانت صغيرة،
+لأن اللحظات البسيطة ساعات بتبقى أجمل لحظات العمر،
+وإنتِ تستاهلي الفرحة دي كلها.`
+},
+
+{
+title: "لما تنسي قيمتك 🦋",
+text: `عايز أفكرك إن قيمتك مش مرتبطة برأي حد فيكي،
+ولا بيوم حلو أو وحش،
+ولا بإنك لازم تكوني مثالية عشان تستحقي الحب.
+
+إنتِ إنسانة ليكي قيمة،
+وليكي أحلام ومشاعر وحاجات حلوة كتير،
+ومتسمحيش ليوم صعب أو كلمة تضايقك
+تخليكي تنسي ده.
+
+خليكي دايمًا فاكرة إنك تستاهلي كل خير. 🤍`
+},
+
+{
+title: "الظرف الأخير ❤️",
+text: `مفيش مناسبة معينة تستاهل تفتحي فيها الظرف ده،
+افتحيه في أي وقت تحبي.
+
+كنت عايز أسيبلك هنا حاجة يمكن الكلام مش بيعرف يوصفها كويس،
+وجودك في حياتي خلاني أقدّر تفاصيل كتير،
+وخلاني أحب اللحظات البسيطة أكتر.
+
+وأتمنى دايمًا أشوفك بخير،
+بتضحكي،
+وبتحققي اللي بتحلمي بيه،
+وتفضلي محتفظة بكل الحاجات الحلوة اللي فيكي.
+
+ومهما الأيام اتغيرت،
+متنسيش إنك تستاهلي كل حاجة جميلة في الدنيا،
+وإن في حد بيتمنى ليكي الخير من قلبه دايمًا. ❤️`
+}
+
+];
+
+const eyeFile = document.getElementById("eyeFile");
+const eyeImage = document.getElementById("eyeImage");
+const placeholder = document.getElementById("placeholder");
+const scanBtn = document.getElementById("scanBtn");
+const status = document.getElementById("status");
+const scanLine = document.getElementById("scanLine");
+
+eyeFile.addEventListener("change", function() {
+
+  const file = this.files[0];
+  if (!file) return;
+
+  eyeImage.src = URL.createObjectURL(file);
+  eyeImage.style.display = "block";
+  placeholder.style.display = "none";
+  scanBtn.style.display = "inline-block";
+  status.textContent = "الصورة جاهزة.. دوسي ابدأ المسح ✨";
+
+});
+
+scanBtn.addEventListener("click", function() {
+
+  scanBtn.disabled = true;
+  scanBtn.textContent = "جاري التحقق...";
+  scanLine.style.display = "block";
+  status.textContent = "جاري مسح العين...";
+
+  setTimeout(() => {
+    scanLine.style.display = "none";
+    status.textContent = "تم التحقق بنجاح ❤️";
+
+    setTimeout(() => {
+      document.getElementById("screen1").classList.remove("active");
+      document.getElementById("screen2").classList.add("active");
+      startHearts();
+    }, 1000);
+
+  }, 2500);
+
+});
+
+function openLetter(index) {
+  document.getElementById("letterTitle").textContent = letters[index].title;
+  document.getElementById("letterText").textContent = letters[index].text;
+  document.getElementById("letter").style.display = "flex";
+}
+
+function closeLetter() {
+  document.getElementById("letter").style.display = "none";
+}
+
+function startHearts() {
+  setInterval(() => {
+
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = ["♡","♥","💕","💗"][Math.floor(Math.random()*4)];
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (14 + Math.random()*20) + "px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 7000);
+
+  }, 800);
+}
+
+</script>
+
+</body>
+</html>
